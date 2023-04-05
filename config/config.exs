@@ -1,10 +1,11 @@
-import Config
+# This file is responsible for configuring your application
+# and its dependencies with the aid of the Config module.
+#
+# This configuration file is loaded before any dependency and
+# is restricted to this project.
 
-config :itch_clone, Itch_IO.Repo,
-  database: "itch_clone_repo",
-  username: "user",
-  password: "pass",
-  hostname: "localhost"
+# General application configuration
+import Config
 
 config :itch_clone,
   ecto_repos: [ItchClone.Repo]
@@ -19,7 +20,13 @@ config :itch_clone, ItchCloneWeb.Endpoint,
   pubsub_server: ItchClone.PubSub,
   live_view: [signing_salt: "ys0xteY5"]
 
-
+# Configures the mailer
+#
+# By default it uses the "Local" adapter which stores the emails
+# locally. You can see the emails in your browser, at "/dev/mailbox".
+#
+# For production it's recommended to configure a different adapter
+# at the `config/runtime.exs`.
 config :itch_clone, ItchClone.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
