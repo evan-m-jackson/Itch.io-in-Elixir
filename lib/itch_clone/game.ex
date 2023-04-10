@@ -6,14 +6,14 @@ defmodule ItchClone.Game do
     field :description, :string
     field :title, :string
     field :url, :string
-
+    field :file, :string, virtual: true
     timestamps()
   end
 
   @doc false
   def changeset(game, attrs) do
     game
-    |> cast(attrs, [:title, :url, :description])
-    |> validate_required([:title, :url, :description])
+    |> cast(attrs, [:title, :url, :file, :description])
+    |> validate_required([:title, :url, :file, :description])
   end
 end
