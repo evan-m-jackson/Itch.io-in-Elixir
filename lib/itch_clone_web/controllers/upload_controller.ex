@@ -1,5 +1,8 @@
 defmodule ItchCloneWeb.UploadController do
   use ItchCloneWeb, :controller
+  alias Aws
+  alias GameFile
+  import Mockery.Macro
 
   def new(conn, _params) do
     render conn
@@ -10,16 +13,16 @@ defmodule ItchCloneWeb.UploadController do
 
     s3_bucket = "itch-clone"
 
-    file_binary = File.read!(upload.path)
+    file_binary = mockable(GameFile).read(upload.path)
 
     try do
-      ExAws.S3.put_object(s3_bucket, s3_filename, file_binary)
-      |> ExAws.request()
-
-      json conn, "Uploaded #{upload.path} to a temporary directory"
-    catch
-      :error -> json conn, "Error"
+      mockable(Aws).add(s3_bucket, s3_filename, file_binary)
+      json conn, "Uploaded to a temporary directory"
+    rescue
+      e in RuntimeError -> json conn, "Error"
     end
+
+
   end
 
 end
