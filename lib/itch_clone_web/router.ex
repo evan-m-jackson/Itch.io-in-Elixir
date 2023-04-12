@@ -1,5 +1,6 @@
 defmodule ItchCloneWeb.Router do
   alias ItchCloneWeb.PageController
+  alias ItchCloneWeb.UploadController
   use ItchCloneWeb, :router
 
   pipeline :browser do
@@ -21,7 +22,11 @@ defmodule ItchCloneWeb.Router do
     get "/", PageController, :home
 
     get "/new", PageController, :new
+
+    resources "/games", UploadController, only: [:index, :new, :create, :show]
   end
+
+
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:itch_clone, :dev_routes) do
