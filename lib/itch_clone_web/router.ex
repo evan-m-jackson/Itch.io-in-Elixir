@@ -24,6 +24,8 @@ defmodule ItchCloneWeb.Router do
     get "/new", PageController, :new
 
     resources "/games", UploadController, only: [:index, :new, :create, :show]
+
+    get "/launch", UploadController, :launch
   end
 
 
