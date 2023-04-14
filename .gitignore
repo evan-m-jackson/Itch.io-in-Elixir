@@ -37,5 +37,3 @@ npm-debug.log
 
 # Ignore JetBrains files
 .idea/*
-
-.env.*

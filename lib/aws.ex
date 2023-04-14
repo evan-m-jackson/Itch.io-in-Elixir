@@ -1,7 +1,8 @@
 defmodule Aws do
 
   def add(bucket, filename, filebinary) do
-    ExAws.S3.put_object(bucket, filename, filebinary)
+    content_type = MIME.from_path(filename)
+    ExAws.S3.put_object(bucket, filename, filebinary, [content_type: content_type])
     |> ExAws.request()
     :ok
   end
@@ -24,8 +25,16 @@ defmodule Aws do
     file_path = Enum.at(filelist, n)
     IO.puts(file_path)
     file_binary = File.read!(file_path)
-    filename = "#{folder}/#{Path.basename(file_path)}"
+    filename = "#{Path.basename(file_path)}"
     add(bucket, filename, file_binary)
+  end
+
+  def create_bucket(name, region) do
+    code = to_string(:rand.uniform(10000))
+    s3_bucket = "#{name}#{code}"
+    ExAws.S3.put_bucket(s3_bucket, region)
+    |> ExAws.request()
+    s3_bucket
   end
 
 end
