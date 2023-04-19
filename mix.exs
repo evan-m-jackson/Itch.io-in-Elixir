@@ -56,7 +56,8 @@ defmodule ItchClone.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:mockery, "~> 2.3.0", runtime: false},
       {:unzip, "~> 0.8.0"},
-      {:temp, "~> 0.4"}
+      {:temp, "~> 0.4"},
+      {:elixir_auth_google, "~> 1.6.5"}
     ]
   end
 

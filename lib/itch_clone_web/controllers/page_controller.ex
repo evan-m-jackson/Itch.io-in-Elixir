@@ -3,7 +3,8 @@ defmodule ItchCloneWeb.PageController do
   alias ItchClone.NewGame
 
   def home(conn, _params) do
-    render conn
+    oauth_google_url = ElixirAuthGoogle.generate_oauth_url(conn)
+    render(conn, :home, oauth_google_url: oauth_google_url)
   end
 
   def new(conn, _params) do
