@@ -54,8 +54,8 @@ config :phoenix, :json_library, Jason
 
 config :ex_aws,
   json_codec: Jason,
-  access_key_id: System.get_env("ACCESS_KEY"),
-  secret_access_key: System.get_env("SECRET_ACCESS_KEY")
+  access_key_id: System.get_env("AWS_ACCESS_KEY"),
+  secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY")
 
 config :elixir_auth_google,
   client_id: System.get_env("GOOGLE_CLIENT_ID"),
