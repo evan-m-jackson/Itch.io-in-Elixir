@@ -6,7 +6,7 @@ defmodule ItchCloneWeb.UploadController do
   alias Unzip.S3File
   import Mockery.Macro
 
-  @s3_bucket System.get_env("AWS_S3_BUCKET") || "itch-clone1401"
+  @s3_bucket System.get_env("AWS_S3_BUCKET") || "itch-clone1402"
 
   def new(conn, _params) do
     render conn
