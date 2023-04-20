@@ -3,7 +3,11 @@ defmodule ItchCloneWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "Hello world!"
+    assert html_response(conn, 200) =~ "Add New Project"
+    assert html_response(conn, 200) =~ "GitHub"
+    assert html_response(conn, 200) =~ "Welcome to the Itch.io Clone"
+    assert html_response(conn, 200) =~ "To get started, login to your Google Account:"
+    assert html_response(conn, 200) =~ "Sign in with Google"
   end
 
   test "GET /new", %{conn: conn} do

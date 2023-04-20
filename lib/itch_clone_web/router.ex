@@ -1,6 +1,7 @@
 defmodule ItchCloneWeb.Router do
   alias ItchCloneWeb.PageController
   alias ItchCloneWeb.UploadController
+  alias ItchCloneWeb.GoogleAuthController
   use ItchCloneWeb, :router
 
   pipeline :browser do
@@ -24,6 +25,10 @@ defmodule ItchCloneWeb.Router do
     get "/new", PageController, :new
 
     resources "/games", UploadController, only: [:index, :new, :create, :show]
+
+    get "/launch", UploadController, :launch
+
+    get "/auth/google/callback", GoogleAuthController, :index
   end
 
 
