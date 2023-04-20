@@ -29,7 +29,7 @@ If you would like to run this project locally on your machine, then you will nee
 
 For the AWS access key and secret access key, please follow the instructions here: https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html
 
-And then you can create an AWS S3 bucket by following these instructions: https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html. These instructions also go over how to enable a bucket to host a static website.
+And then you can create an AWS S3 bucket by following these instructions: https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html. These instructions also go over how to enable a bucket to host a static website. Only Steps 1-4 are necessary for this project.
 
 Finally, for the Google Client ID and Client Secret, please follow these instructions: https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid
 
