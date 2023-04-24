@@ -13,7 +13,7 @@ defmodule ItchCloneWeb.GoogleAuthController do
     render conn
   end
 
-  def welcome(conn, %{"profile" => profile}) do
+  def welcome(conn, %{"profile" => _profile}) do
     render conn
   end
 end

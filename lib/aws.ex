@@ -12,16 +12,16 @@ defmodule Aws do
     |> ExAws.request()
   end
 
-  def add_multiple(bucket, folder, filelist, n) when n == 0 do
-    add_multiple_helper(bucket, folder, filelist, n)
+  def add_multiple(bucket, filelist, n) when n == 0 do
+    add_multiple_helper(bucket, filelist, n)
   end
 
-  def add_multiple(bucket, folder, filelist, n) do
-    add_multiple_helper(bucket, folder, filelist, n)
-    add_multiple(bucket, folder, filelist, n - 1)
+  def add_multiple(bucket, filelist, n) do
+    add_multiple_helper(bucket, filelist, n)
+    add_multiple(bucket, filelist, n - 1)
   end
 
-  def add_multiple_helper(bucket, folder, filelist, n) do
+  def add_multiple_helper(bucket, filelist, n) do
     file_path = Enum.at(filelist, n)
     IO.puts(file_path)
     file_binary = File.read!(file_path)
