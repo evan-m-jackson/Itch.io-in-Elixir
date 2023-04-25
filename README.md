@@ -19,7 +19,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## For Developers
 
-If you would like to run this project locally on your machine, then you will need to create a `env.dev` file in the main project root. The file's content should be in this format:
+If you would like to run this project locally on your machine, then you will need to create a `.env.dev` file in the main project root. The file's content should be in this format:
 
     export AWS_ACCESS_KEY={AWS_ACCESS_KEY}
     export AWS_SECRET_ACCESS_KEY={AWS_SECRET_ACCESS_KEY}
@@ -31,7 +31,7 @@ For the AWS access key and secret access key, please follow the instructions her
 
 And then you can create an AWS S3 bucket by following these instructions: https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html. These instructions also go over how to enable a bucket to host a static website. Only Steps 1-4 are necessary for this project.
 
-Finally, for the Google Client ID and Client Secret, please follow these instructions: https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid
+Finally, for the Google Client ID and Client Secret, please follow these instructions: https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid. Once the Client ID and Secret are created, you will need to add a Redirect URI. Here is a helpful Stack Overflow post that goes over this: https://stackoverflow.com/questions/16693653/how-to-add-or-change-return-uri-in-google-console-for-oauth2. The redirect uri you will need to add is `http://localhost:4000/auth/google/callback`. 
 
 When the environment variables are all set, run the following command to start the app:
 

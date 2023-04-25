@@ -1,6 +1,7 @@
 defmodule Unzip.S3File do
   alias Aws
   alias Temp
+  @dialyzer [{:nowarn_function, unzip: 2}, {:nowarn_function, run: 2}]
 
   def run(bucket, zip_path) do
     zip_file_binary = File.read!(zip_path)

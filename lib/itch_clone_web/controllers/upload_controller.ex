@@ -4,6 +4,7 @@ defmodule ItchCloneWeb.UploadController do
   alias Unzip
   alias Temp
   import Mockery.Macro
+  @dialyzer {:nowarn_function, create: 2}
 
   @s3_bucket System.get_env("AWS_S3_BUCKET") || "itch-clone1402"
 
