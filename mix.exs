@@ -57,7 +57,8 @@ defmodule ItchClone.MixProject do
       {:mockery, "~> 2.3.0", runtime: false},
       {:unzip, "~> 0.8.0"},
       {:temp, "~> 0.4"},
-      {:elixir_auth_google, "~> 1.6.5"}
+      {:elixir_auth_google, "~> 1.6.5"},
+      {:dialyxir, "~> 1.3", only: [:dev], runtime: false}
     ]
   end
 
