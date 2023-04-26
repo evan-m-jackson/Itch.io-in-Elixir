@@ -11,6 +11,7 @@ defmodule ItchCloneWeb.Router do
     plug :put_root_layout, {ItchCloneWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug ItchCloneWeb.SetCurrentUser
   end
 
   pipeline :api do
@@ -23,6 +24,8 @@ defmodule ItchCloneWeb.Router do
     get "/", PageController, :home
 
     get "/new", PageController, :new
+
+    get "/signout", PageController, :signout
 
     resources "/games", UploadController, only: [:index, :new, :create, :show]
 

@@ -3,12 +3,16 @@ defmodule ItchCloneWeb.UploadControllerTest do
   alias Aws
   alias GameFile
   import Mockery
+  import Plug.Test
   import Mockery.Assertions
 
   @valid_file %Plug.Upload{filename: "Game.zip", content_type: "application/zip", path: "/absolute_path_to/Game.zip" }
+  @user %ItchClone.User{id: 1, email: "macewindu@example.com", token: "123456abcdef"}
 
   test "GET /games/new", %{conn: conn} do
-    conn = get(conn, ~p"/games/new")
+    conn = Plug.Test.conn()
+      |> assign(:user, @user)
+      |> get(~p"/games/new")
     assert html_response(conn, 200) =~ "Create a new project"
     assert html_response(conn, 200) =~ "Upload files"
   end
