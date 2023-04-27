@@ -18,6 +18,10 @@ defmodule ItchCloneWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug ItchCloneWeb.AuthoriseUser
+  end
+
   scope "/" do
     pipe_through :browser
 
@@ -27,14 +31,16 @@ defmodule ItchCloneWeb.Router do
 
     get "/signout", PageController, :signout
 
-    resources "/games", UploadController, only: [:index, :new, :create, :show]
-
     get "/launch", UploadController, :launch
 
     get "/auth/google/callback", GoogleAuthController, :index
   end
 
+  scope "/" do
+    pipe_through [:browser, :auth]
 
+    resources "/games", UploadController, only: [:index, :new, :create, :show]
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:itch_clone, :dev_routes) do

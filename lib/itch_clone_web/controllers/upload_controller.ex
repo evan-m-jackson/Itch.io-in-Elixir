@@ -9,11 +9,7 @@ defmodule ItchCloneWeb.UploadController do
   @s3_bucket System.get_env("AWS_S3_BUCKET") || "itch-clone1402"
 
   def new(conn, _params) do
-    if conn.assigns[:user] do
       render conn
-    else
-      redirect(conn, to: "/")
-    end
   end
 
   def create(conn, %{"upload" => %Plug.Upload{}=upload}) do

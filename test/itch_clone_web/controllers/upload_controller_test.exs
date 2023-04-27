@@ -10,9 +10,10 @@ defmodule ItchCloneWeb.UploadControllerTest do
   @user %ItchClone.User{id: 1, email: "macewindu@example.com", token: "123456abcdef"}
 
   test "GET /games/new", %{conn: conn} do
-    conn = Plug.Test.conn()
+    conn = Phoenix.ConnTest.build_conn()
       |> assign(:user, @user)
-      |> get(~p"/games/new")
+
+    conn = get(conn, ~p"/games/new")
     assert html_response(conn, 200) =~ "Create a new project"
     assert html_response(conn, 200) =~ "Upload files"
   end
@@ -21,6 +22,8 @@ defmodule ItchCloneWeb.UploadControllerTest do
 
     test "game is successfully uploaded", %{conn: conn} do
       mock Unzip.S3File, :run, :ok
+      conn = Phoenix.ConnTest.build_conn()
+      |> assign(:user, @user)
 
       conn = post(conn, ~p"/games", upload: @valid_file)
       assert html_response(conn, 200) =~ "Play the Game!"
