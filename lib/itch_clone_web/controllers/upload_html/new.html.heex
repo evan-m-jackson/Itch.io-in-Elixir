@@ -1,4 +1,9 @@
  <h2 class="text-2xl font-bold">Create a new project</h2>
+ <%= if assigns[:error_msg] do %>
+  <div class="error">
+    <p><%= assigns[:error_msg] %></p>
+  </div>
+<% end %>
 <%= form_for @conn, "/games", [multipart: true, class: "block space-y-8"] , fn f -> %>
     <%= file_input f, :upload, [value: "Uploads"] %>
     <%= submit "Upload files", class: "btn btn-primary bg-red-500 py-2 px-2 text-white font-bold" %>
