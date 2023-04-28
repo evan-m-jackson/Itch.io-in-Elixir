@@ -1,4 +1,4 @@
-defmodule ItchCloneWeb.UploadController do
+defmodule ItchCloneWeb.GameController do
   use ItchCloneWeb, :controller
   alias Aws
   alias Unzip

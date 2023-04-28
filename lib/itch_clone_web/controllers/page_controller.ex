@@ -14,9 +14,4 @@ defmodule ItchCloneWeb.PageController do
     render conn, user_changeset: changeset
   end
 
-  def signout(conn, _params) do
-    conn
-    |> Plug.Conn.clear_session()
-    |> redirect(to: "/")
-  end
 end

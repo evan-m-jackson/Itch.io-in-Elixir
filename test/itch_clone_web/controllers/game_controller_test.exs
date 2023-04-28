@@ -1,4 +1,4 @@
-defmodule ItchCloneWeb.UploadControllerTest do
+defmodule ItchCloneWeb.GameControllerTest do
   use ItchCloneWeb.ConnCase
   alias Aws
   alias GameFile
