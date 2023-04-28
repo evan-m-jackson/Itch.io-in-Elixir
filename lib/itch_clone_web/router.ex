@@ -2,6 +2,7 @@ defmodule ItchCloneWeb.Router do
   alias ItchCloneWeb.PageController
   alias ItchCloneWeb.UploadController
   alias ItchCloneWeb.GoogleAuthController
+  alias ItchCloneWeb.SignOutController
   use ItchCloneWeb, :router
 
   pipeline :browser do
@@ -29,7 +30,7 @@ defmodule ItchCloneWeb.Router do
 
     get "/new", PageController, :new
 
-    get "/signout", PageController, :signout
+    resources "/signout", SignOutController, only: [:index, :create]
 
     get "/launch", UploadController, :launch
 

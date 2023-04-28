@@ -18,7 +18,6 @@ defmodule ItchCloneWeb.UploadControllerTest do
   }
   @user %ItchClone.User{id: 1, email: "macewindu@example.com", token: "123456abcdef"}
 
-
   describe "add a new game page" do
     test "user is logged in and can access page" do
       ItchClone.Repo.insert(@user)
