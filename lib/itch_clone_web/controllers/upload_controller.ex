@@ -9,7 +9,7 @@ defmodule ItchCloneWeb.UploadController do
   @s3_bucket System.get_env("AWS_S3_BUCKET") || "itch-clone1402"
 
   def new(conn, _params) do
-    render(conn)
+    render conn
   end
 
   def create(conn, %{"upload" => %Plug.Upload{} = upload}) do

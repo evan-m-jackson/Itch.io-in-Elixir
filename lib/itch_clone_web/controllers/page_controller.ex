@@ -1,6 +1,7 @@
 defmodule ItchCloneWeb.PageController do
   use ItchCloneWeb, :controller
   alias ItchClone.NewGame
+  import Plug.Conn
 
   def home(conn, _params) do
     oauth_google_url = ElixirAuthGoogle.generate_oauth_url(conn)
@@ -11,5 +12,11 @@ defmodule ItchCloneWeb.PageController do
     changeset = NewGame.new_game_changeset()
 
     render conn, user_changeset: changeset
+  end
+
+  def signout(conn, _params) do
+    conn
+    |> Plug.Conn.clear_session()
+    |> redirect(to: "/")
   end
 end
