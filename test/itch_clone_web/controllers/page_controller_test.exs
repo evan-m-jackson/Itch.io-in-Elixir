@@ -6,6 +6,7 @@ defmodule ItchCloneWeb.PageControllerTest do
   describe "the home page" do
     test "when a user hasn't signed in yet", %{conn: conn} do
       conn = get(conn, ~p"/")
+      assert html_response(conn, 200) =~ "Dashboard"
       assert html_response(conn, 200) =~ "Add New Project"
       assert html_response(conn, 200) =~ "GitHub"
       assert html_response(conn, 200) =~ "Welcome to the Itch.io Clone"

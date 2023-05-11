@@ -1,6 +1,6 @@
 defmodule ItchCloneWeb.Router do
   alias ItchCloneWeb.PageController
-  alias ItchCloneWeb.UploadController
+  alias ItchCloneWeb.GameController
   alias ItchCloneWeb.GoogleAuthController
   alias ItchCloneWeb.SignOutController
   use ItchCloneWeb, :router
@@ -32,7 +32,7 @@ defmodule ItchCloneWeb.Router do
 
     resources "/signout", SignOutController, only: [:index, :create]
 
-    get "/launch", UploadController, :launch
+    get "/launch", GameController, :launch
 
     get "/auth/google/callback", GoogleAuthController, :index
   end
@@ -40,7 +40,7 @@ defmodule ItchCloneWeb.Router do
   scope "/" do
     pipe_through [:browser, :auth]
 
-    resources "/games", UploadController, only: [:index, :new, :create, :show]
+    resources "/games", GameController, only: [:index, :new, :create, :show]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
