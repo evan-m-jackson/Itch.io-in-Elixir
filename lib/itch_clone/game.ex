@@ -3,7 +3,7 @@ defmodule ItchClone.Game do
   import Ecto.Changeset
 
   schema "games" do
-    field :description, :string
+    field :user_id, :integer
     field :title, :string
     field :url, :string
     field :file, :string, virtual: true
@@ -13,7 +13,7 @@ defmodule ItchClone.Game do
   @doc false
   def changeset(game, attrs) do
     game
-    |> cast(attrs, [:title, :url, :file, :description])
-    |> validate_required([:title, :url, :file, :description])
+    |> cast(attrs, [:title, :url, :file, :user_id])
+    |> validate_required([:title, :url, :file, :user_id])
   end
 end

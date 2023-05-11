@@ -27,7 +27,9 @@ defmodule ItchCloneWeb.GameControllerTest do
 
       conn = get(conn, ~p"/games/new")
       assert html_response(conn, 200) =~ "Create a new project"
-      assert html_response(conn, 200) =~ "Upload files"
+      assert html_response(conn, 200) =~ "Title"
+      assert html_response(conn, 200) =~ "Uploads"
+      assert html_response(conn, 200) =~ "Save &amp; launch"
     end
 
     test "user is not logged in and gets redirected to home page" do
@@ -46,7 +48,7 @@ defmodule ItchCloneWeb.GameControllerTest do
         Phoenix.ConnTest.build_conn()
         |> Phoenix.ConnTest.init_test_session(user_id: @user.id)
 
-      conn = post(conn, ~p"/games", upload: @valid_file)
+      conn = post(conn, ~p"/games", upload: @valid_file, title: "New Game")
       assert html_response(conn, 200) =~ "Play the Game!"
       assert_called(Unzip.S3File, :run)
     end
@@ -57,8 +59,68 @@ defmodule ItchCloneWeb.GameControllerTest do
         Phoenix.ConnTest.build_conn()
         |> Phoenix.ConnTest.init_test_session(user_id: @user.id)
 
-      conn = post(conn, ~p"/games", upload: @unzipped_file)
+      conn = post(conn, ~p"/games", upload: @unzipped_file, title: "New Game")
       assert(html_response(conn, 422))
+    end
+
+    test "game is added to Repo" do
+      mock Unzip.S3File, :run, :ok
+      ItchClone.Repo.insert(@user)
+      conn =
+        Phoenix.ConnTest.build_conn()
+        |> Phoenix.ConnTest.init_test_session(user_id: @user.id)
+
+      conn = post(conn, ~p"/games", upload: @valid_file, title: "New Game")
+      game = ItchClone.Repo.get_by(ItchClone.Game, title: "New Game")
+      assert game != nil
+    end
+
+    test "game is not added to Repo when title inputted is blank" do
+      mock Unzip.S3File, :run, :ok
+      ItchClone.Repo.insert(@user)
+      conn =
+        Phoenix.ConnTest.build_conn()
+        |> Phoenix.ConnTest.init_test_session(user_id: @user.id)
+
+      conn = post(conn, ~p"/games", upload: @valid_file, title: "")
+      game = ItchClone.Repo.get_by(ItchClone.Game, title: "")
+      assert game == nil
+    end
+  end
+
+  describe "user dashboard" do
+    test "gets redirected to home page when user is not signed in" do
+      conn = Phoenix.ConnTest.build_conn()
+      conn = get(conn, ~p"/games")
+      assert html_response(conn, 302)
+    end
+
+    test "shows user's list of games uploaded" do
+      game = %ItchClone.Game{title: "First Game", url: "https://example.com", user_id: 1}
+      ItchClone.Repo.insert(@user)
+      ItchClone.Repo.insert(game)
+      conn =
+        Phoenix.ConnTest.build_conn()
+        |> Phoenix.ConnTest.init_test_session(user_id: @user.id)
+
+
+      conn = get(conn, ~p"/games")
+      assert html_response(conn, 200) =~ "Creator Dashboard"
+      assert html_response(conn, 200) =~ "First Game"
+    end
+
+    test "only shows games for applicable user id" do
+      game = %ItchClone.Game{title: "First Game", url: "https://example.com", user_id: 2}
+      ItchClone.Repo.insert(@user)
+      ItchClone.Repo.insert(game)
+      conn =
+        Phoenix.ConnTest.build_conn()
+        |> Phoenix.ConnTest.init_test_session(user_id: @user.id)
+
+
+      conn = get(conn, ~p"/games")
+      assert html_response(conn, 200) =~ "Creator Dashboard"
+      refute html_response(conn, 200) =~ "First Game"
     end
   end
 end

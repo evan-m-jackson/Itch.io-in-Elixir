@@ -1,0 +1,7 @@
+<h2 class="my-8 text-2xl font-bold">Creator Dashboard</h2>
+
+<%= for item <- @game_list  do %>
+    <%= if item.user_id == @user_id do %>
+        <div class="w-1/2 outline outline-1 outline-gray-300 px-2 py-2"> <a class="text-xl font-bold"><%= item.title %></a> </div>
+    <% end %>
+<% end %>

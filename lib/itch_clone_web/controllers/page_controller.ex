@@ -1,6 +1,5 @@
 defmodule ItchCloneWeb.PageController do
   use ItchCloneWeb, :controller
-  alias ItchClone.NewGame
   import Plug.Conn
 
   def home(conn, _params) do
@@ -9,9 +8,7 @@ defmodule ItchCloneWeb.PageController do
   end
 
   def new(conn, _params) do
-    changeset = NewGame.new_game_changeset()
-
-    render conn, user_changeset: changeset
+    render conn
   end
 
 end
